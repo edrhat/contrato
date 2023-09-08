@@ -1,8 +1,13 @@
-from tkcalendar import DateEntry
+
 from tkinter import *
 import os
 from tkinter import ttk
+from tkcalendar import DateEntry
 
+#VARIAVEIS GLOBAIS
+contratO = 0
+valor = 0
+##############################
 class Tela():
 
      def __init__(self, master):
@@ -114,10 +119,12 @@ class Tela():
 
      def gerar_contrato(self, event):
 
+          global valor
           nome = self.nomeE.get()
           cpf = self.cpfE.get()
           d = self.dispositivoE.get()
           s = self.servicoE.get()
+          data = self.dataE.get()
 
           valor = 0
 
@@ -151,6 +158,7 @@ class Tela():
           self.servicoE.delete(0, "end")
           self.adicionalE.delete("1.0", "end")
 
+          global contrato
           
           contrato = Tk()
           contrato.resizable(width=False, height=False)
@@ -158,22 +166,30 @@ class Tela():
           contrato.title("Contrato")
           contrato.config(bg="white")
 
+          #BOTÃO ALTERAR
+          self.alterar = Button(contrato, text="Alterar valor")
+          self.alterar["font"] = ("Arial", "15")
+          self.alterar.config(bg="red", foreground="white")
+          self.alterar.place(x=480,y=640)
+          self.alterar.bind("<Button-1>", self.alterar_valor)
+          
+
           self.lb1 = Label(contrato, text="CONTRATO DIGITAL - CJ SYSTEMS")
           self.lb1["font"] = ("Arial", "15")
           self.lb1.config(bg="white")
           self.lb1.place(x=150,y=5)
 
           self.lb2 = Label(contrato, text="CONTRATANTE: {}".format(nome))
-          self.lb2["font"] = ("Arial", "13")
+          self.lb2["font"] = ("Arial", "13", "bold")
           self.lb2.config(bg="white", foreground="black")
           self.lb2.place(x=10,y=100)
 
           self.lb3 = Label(contrato, text="CPF: {}".format(cpf))
-          self.lb3["font"] = ("Arial", "13")
+          self.lb3["font"] = ("Arial", "13", "bold")
           self.lb3.config(bg="white", foreground="black")
           self.lb3.place(x=10,y=130)
 
-          self.lb4 = Label(contrato, text="O presente contrato tem por objeto a prestação continuada de\n serviços de manutenção corretiva e preventiva em {},\n será realizada especificamente a {} do dispositivo, \n podendo ter acréscimo no valor final caso o técnico \n precise fazer outro reparo.".format(d,s))
+          self.lb4 = Label(contrato, text="O presente contrato tem por objeto a prestação continuada de\n serviços de manutenção corretiva e preventiva em {},\n será realizada especificamente a {} do dispositivo, \n podendo ter acréscimo no valor final caso o técnico \n precise fazer outro reparo\n\n Serviço solicitado dia {}".format(d,s, data))
           self.lb4["font"] = ("Arial", "16")
           self.lb4.config(bg="white", foreground="black")
           self.lb4.place(x=4,y=200)
@@ -181,17 +197,52 @@ class Tela():
           self.lb5 = Label(contrato, text="Valor: R${}".format(valor))
           self.lb5["font"] = ("Arial", "14")
           self.lb5.config(bg="white", foreground="red")
-          self.lb5.place(x=4,y=600)
+          self.lb5.place(x=4,y=650)
 
 
           
 
 
+     def alterar_valor(self, event):
           
+      global contrato
+      self.alterar.place(x=1212121)
+
+      self.alterar = Button(contrato, text="Confirmar valor")
+      self.alterar["font"] = ("Arial", "15")
+      self.alterar.config(bg="green",foreground="white")
+      self.alterar.place(x=470,y=640)
+      self.alterar.bind("<Button-1>", self.confirma)
+
+      self.alt = Entry(contrato)
+      self.alt["font"] = ("Arial", "17")
+      self.alt.config(bg="lightgrey")
+      self.alt.place(x=370, y=641, height=40, width=90)
+
+     def confirma(self, event):
+          
+      global contrato
+      global valor 
+      valor = self.alt.get()
+      
+
+      self.lb5.place(x=121212121)    
+      self.lb5 = Label(contrato, text="Valor: R${}".format(valor))
+      self.lb5["font"] = ("Arial", "14")
+      self.lb5.config(bg="white", foreground="red")
+      self.lb5.place(x=4,y=650)
+
+      self.alt.place(x=12121212)
+      self.alterar.place(x=12121212)
+
+      self.alterar = Button(contrato, text="Alterar valor")
+      self.alterar["font"] = ("Arial", "15")
+      self.alterar.config(bg="red", foreground="white")
+      self.alterar.place(x=480,y=640)
+      self.alterar.bind("<Button-1>", self.alterar_valor)
+      
 
       
-          
-
    
     
 
