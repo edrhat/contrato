@@ -74,7 +74,7 @@ class Tela():
         self.servico["font"] = ("Calibri", "25", "bold")
         self.servico.place(x=420, y=210)
 
-        servicos = ["Formatação", "Troca de peças", "Limpeza", "Recuperação de dados","Quebra de senha","Upgrade","Outro..."]  
+        servicos = ["Formatação", "Troca de peças", "Limpeza","Quebra de senha","Upgrade","Outro..."]  
         self.servicoE= ttk.Combobox(janela, values=servicos)
         self.servicoE["font"] = ("Calibri", "25")
         self.servicoE.config(foreground="#696969")
@@ -119,7 +119,7 @@ class Tela():
           d = self.dispositivoE.get()
           s = self.servicoE.get()
 
-          valor = 1400
+          valor = 0
 
           if(s == "Formatação"):
                valor = 90
@@ -129,9 +129,7 @@ class Tela():
 
           if(s == "Limpeza"):
                valor = 50
-               
-          if(s == "Recuperação de dados"):
-               valor = 100
+
                
           if(s == "Quebra de senha"):
                valor = 30
@@ -155,13 +153,15 @@ class Tela():
 
           
           contrato = Tk()
-          contrato.geometry("630x700")
+          contrato.resizable(width=False, height=False)
+          contrato.geometry("630x700+200+60")
+          contrato.title("Contrato")
           contrato.config(bg="white")
 
           self.lb1 = Label(contrato, text="CONTRATO DIGITAL - CJ SYSTEMS")
           self.lb1["font"] = ("Arial", "15")
           self.lb1.config(bg="white")
-          self.lb1.place(x=80,y=5)
+          self.lb1.place(x=150,y=5)
 
           self.lb2 = Label(contrato, text="CONTRATANTE: {}".format(nome))
           self.lb2["font"] = ("Arial", "13")
@@ -173,8 +173,8 @@ class Tela():
           self.lb3.config(bg="white", foreground="black")
           self.lb3.place(x=10,y=130)
 
-          self.lb4 = Label(contrato, text="O presente contrato tem por objeto a prestação continuada de\n serviços de manutenção corretiva e preventiva em {},\n será realizada especificamente a {} do dispositivo, \n podendo ter acréscimo no valor final caso o prestador \n precise fazer outro reparo.".format(d,s))
-          self.lb4["font"] = ("Arial", "14")
+          self.lb4 = Label(contrato, text="O presente contrato tem por objeto a prestação continuada de\n serviços de manutenção corretiva e preventiva em {},\n será realizada especificamente a {} do dispositivo, \n podendo ter acréscimo no valor final caso o técnico \n precise fazer outro reparo.".format(d,s))
+          self.lb4["font"] = ("Arial", "16")
           self.lb4.config(bg="white", foreground="black")
           self.lb4.place(x=4,y=200)
 
@@ -182,6 +182,9 @@ class Tela():
           self.lb5["font"] = ("Arial", "14")
           self.lb5.config(bg="white", foreground="red")
           self.lb5.place(x=4,y=600)
+
+
+          
 
 
           
